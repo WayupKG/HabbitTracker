@@ -1,0 +1,252 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    margin: 0;
+    background-color: #F3F6FD;
+    font-weight: 400;
+}
+
+.app {
+    display: flex;
+}
+
+.panel {
+    background-color: white;
+    min-height: 100vh;
+    padding: 60px;
+}
+
+.panel .logo {
+    margin-bottom: 70px;
+    transform: scale(1.5);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+}
+
+.menu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.menu .menu__item {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 14px rgba(62, 107, 224, 0.12);
+    border-radius: 14px;
+    border: none;
+    height: 75px;
+    width: 75px;
+    cursor: pointer;
+}
+
+.menu .menu__item img {
+    transform: scale(1.5);
+}
+
+.menu .menu__item:hover {
+    background-color: #6A6AFB;
+}
+
+.menu .menu__item:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.menu .menu__item_active {
+    background: #5051F9;
+}
+
+.menu .menu__item_active img {
+    filter: brightness(0) invert(1);
+}
+
+.menu .menu__add {
+    background: none;
+    border: 1px solid #CAD5FF;
+    border-radius: 14px;
+    height: 75px;
+    width: 75px;
+    cursor: pointer;
+}
+
+.menu .menu__add:hover {
+    background: #E7EBFF
+}
+
+.menu .menu__add img {
+    transform: scale(2);
+}
+
+
+/* ------------ Content ------------- */
+/* Header */
+
+.content {
+    min-width: 1300px;
+    padding: 45px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 35px;
+    line-height: 33px;
+    color: #000;
+}
+
+/* Header Progress text */
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 335px;
+}
+
+.progress__text {
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress__text .progress__name {
+    font-size: 16px;
+    line-height: 16px;
+    color: #232360;
+}
+
+.progress__text .progress__percent {
+    font-size: 16px;
+    line-height: 13px;
+    color: #768396;
+}
+
+/* Header Progress bar */
+
+.progress__bar {
+    width: 100%;
+    background: #E6E9ED;
+    border-radius: 4px;
+    height: 8px;
+    position: relative;
+}
+
+.progress__cover-bar {
+    width: 50%;
+    background: #5051F9;
+    border-radius: 4px;
+    height: 8px;
+    position: absolute;
+}
+
+
+/* Main habbit list */
+
+.habbit {
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.habbit__day {
+    background: #EDECFE;
+    border-radius: 10px 0 0 10px; 
+    border-right: 1px solid #E7EBFB;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    padding: 20px 40px;
+    min-width: 150px;
+}
+
+.habbit__comment {
+    font-size: 15px;
+    line-height: 16px;
+    color: #000000;
+    padding: 5px 25px;
+}
+
+.habbit__delete {
+    margin-left: auto;
+    margin-right: 10px;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    transition: all .2s;
+}
+
+.habbit__delete:hover {
+    background: #ff0000bf;
+}
+
+.habbit__delete:hover img {
+    filter: brightness(0) invert(1);
+}
+
+/* Main habbit add */
+
+
+.habbit__form {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    padding: 0 25px;
+}
+
+.form__group {
+    position: relative;
+    width: 100%;
+}
+
+.habbit__input {
+    background: #FFF;
+    border: 1px solid #E7EBFB;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 16px;
+    width: 100%;
+    padding-left: 45px;
+}
+
+
+.habbit__input-icon {
+    position: absolute;
+    top: 11px;
+    left: 20px;
+}
+
+.habbit__form-done {
+    background: #EDECFE;
+    border-radius: 9px;
+    padding: 15px 30px;
+    font-size: 16px;
+    line-height: 14px;
+    color: #5051F9;
+    border: none;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.habbit__form-done:hover {
+    background: #5051F9;
+    color: #fff;
+}
