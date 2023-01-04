@@ -2,6 +2,7 @@
 
 let habbits = [];
 const HABBIT_KAY = 'HABBIT_KAY';
+let globalActiveHabbitId;
 
 /* page constanta */
 const page = {
@@ -76,7 +77,7 @@ function renderHabbitDays(activeHabbit) {
 
     page.content.days.innerHTML = '';
 
-    function renderHabbit(item, day) {
+    function renderDay(item, day) {
         const habbit = document.createElement('div');
         const habbitDay = document.createElement('div');
         const habbitComment = document.createElement('div');
@@ -96,21 +97,65 @@ function renderHabbitDays(activeHabbit) {
 
         habbitDay.innerText = `День ${day}`;
         habbitComment.innerText = item.comment;
+
+        habbitDelete.addEventListener('click', () => {
+            deleteDay(day - 1);
+        })
+
         return habbit;
     }
 
     activeHabbit.days.forEach((item, day) => {
-        page.content.days.appendChild(renderHabbit(item, day + 1));
+        page.content.days.appendChild(renderDay(item, day + 1));
     });
 
     page.content.nextDay.innerText = `День ${activeHabbit.days.length + 1}`;
 }
 
+function addDay(event) {
+    event.preventDefault();
+    const form = event.target;
+    const data = new FormData(form);
+    const commentData = data.get('comment');
+    const comment = form['comment'];
+    comment.classList.remove('error');
+    if (!commentData || commentData.length < 5) {
+        comment.classList.add('error');
+    }
+    habbits = habbits.map(habbit => {
+        if (habbit.id === globalActiveHabbitId) {
+            return {
+                ...habbit,
+                days: habbit.days.concat([{ comment: commentData }])
+            }
+        }
+        return habbit;
+    })
+    comment.value = '';
+    rerender(globalActiveHabbitId);
+    saveData();
+}
+
+function deleteDay(index) {
+    habbits = habbits.map(habbit => {
+        if (habbit.id === globalActiveHabbitId) {
+            habbit.days.splice(index, 1)
+            return {
+                ...habbit,
+                days: habbit.days
+            }
+        }
+        return habbit;
+    })
+    rerender(globalActiveHabbitId);
+    saveData();
+}
 
 function rerender(activeHabbitId) {
     if (!activeHabbitId) {
         return;
     }
+    globalActiveHabbitId = activeHabbitId;
     const activeHabbit = habbits.find(habbit => habbit.id === activeHabbitId);
     renderMenu(activeHabbit);
     renderHabbitHead(activeHabbit);

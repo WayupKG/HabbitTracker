@@ -228,6 +228,9 @@ header h1 {
     padding-left: 45px;
 }
 
+.habbit__input.error {
+    border: 2px solid red;
+}
 
 .habbit__input-icon {
     position: absolute;
