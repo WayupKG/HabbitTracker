@@ -59,6 +59,28 @@ function setIcon() {
     });
 }
 
+function resetForm(form, fields) {
+    fields.forEach(field => form[field].value = '');
+}
+
+function getValidateData(form, fields) {
+    const formData = new FormData(form);
+    let isValid = true;
+    const res = {};
+
+    fields.forEach(field => {
+        const fieldValue = formData.get(field);
+        form[field].classList.remove('error');
+        console.log();
+        if ((!fieldValue || fieldValue.length < 3) && !form[field].type === 'number') {
+            form[field].classList.add('error');
+            isValid = false;
+        }
+        res[field] = fieldValue;
+    });
+    return isValid ? res : false;
+}
+
 /* render */
 function renderMenu(activeHabbit) {
     for (const habbit of habbits) {
@@ -135,26 +157,21 @@ function renderHabbitDays(activeHabbit) {
 
 function addDay(event) {
     event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
-    const commentData = data.get('comment');
-    const comment = form['comment'];
-    comment.classList.remove('error');
-    if (!commentData || commentData.length < 5) {
-        comment.classList.add('error');
-    }
-    habbits = habbits.map(habbit => {
-        if (habbit.id === globalActiveHabbitId) {
-            return {
-                ...habbit,
-                days: habbit.days.concat([{ comment: commentData }])
+    const data = getValidateData(event.target, ['comment']);
+    if (data) {
+        habbits = habbits.map(habbit => {
+            if (habbit.id === globalActiveHabbitId) {
+                return {
+                    ...habbit,
+                    days: habbit.days.concat([{comment: data.comment}])
+                }
             }
-        }
-        return habbit;
-    })
-    comment.value = '';
-    rerender(globalActiveHabbitId);
-    saveData();
+            return habbit;
+        })
+        resetForm(event.target, ['comment']);
+        rerender(globalActiveHabbitId);
+        saveData();
+    }
 }
 
 function deleteDay(index) {
@@ -172,14 +189,32 @@ function deleteDay(index) {
     saveData();
 }
 
-
+function addHabbit(event) {
+    event.preventDefault();
+    const data = getValidateData(event.target, ['name', 'icon', 'target']);
+    if (data) {
+        const maxId = habbits.reduce((acc, habbit) => acc > habbit.id ? acc : habbit.id, 0)
+        habbits.push({
+            id: maxId + 1,
+            name: data.name,
+            target: data.target,
+            icon: data.icon,
+            days: [],
+        })
+        resetForm(event.target, ['name', 'icon', 'target']);
+        togglePopup()
+        rerender(maxId + 1);
+        saveData();
+    }
+}
 
 function rerender(activeHabbitId) {
-    if (!activeHabbitId) {
-        return;
-    }
     globalActiveHabbitId = activeHabbitId;
     const activeHabbit = habbits.find(habbit => habbit.id === activeHabbitId);
+    if (!activeHabbit) {
+        return;
+    }
+    document.location.hash = activeHabbit.id 
     renderMenu(activeHabbit);
     renderHabbitHead(activeHabbit);
     renderHabbitDays(activeHabbit);
@@ -188,6 +223,12 @@ function rerender(activeHabbitId) {
 /* init */
 (() => {
     loadData();
-    rerender(habbits[0].id);
+    const hashId = Number(document.location.hash.replace('#', ''));
+    const urlHabbit = habbits.find(habbit => habbit.id == hashId);
+    if (urlHabbit) {
+        rerender(urlHabbit.id);
+    } else {
+        rerender(habbits[0].id);
+    }
     setIcon();
 })()
