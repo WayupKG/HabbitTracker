@@ -144,11 +144,12 @@ header h1 {
 }
 
 .progress__cover-bar {
-    width: 50%;
+    width: 0%;
     background: #5051F9;
     border-radius: 4px;
     height: 8px;
     position: absolute;
+    transition: all .5s;
 }
 
 
