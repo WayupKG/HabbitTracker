@@ -15,10 +15,8 @@
         <div class="panel">
             <img class="logo" src="images/logo/logo.svg" alt="логотип Habbit app">
             <nav class="menu">
-                <div class="menu__list">
-                    
-                </div>
-                <button class="menu__add">
+                <div class="menu__list"></div>
+                <button class="menu__add" onclick="togglePopup(event)">
                     <img src="images/icons/Add.svg" alt="">
                 </button>
             </nav>
@@ -43,13 +41,40 @@
                     <div class="habbit__day">День --</div>
                     <form class="habbit__form" onsubmit="addDay(event)">
                         <div class="form__group">
-                            <input name="comment" class="habbit__input" type="text" placeholder="Комментарий">
-                            <img class="habbit__input-icon" src="images/icons/comment.svg" alt="">
+                            <input name="comment" class="form__input input-icon" type="text" placeholder="Комментарий">
+                            <img class="form__input-icon" src="images/icons/comment.svg" alt="">
                         </div>
-                        <button class="habbit__form-done" type="submit">Готово</button>
+                        <button class="form__done" type="submit">Готово</button>
                     </form>
                 </div>
             </main>
+        </div>
+
+        <div class="cover cover_hidden">
+            <div class="popup">
+                <h2>Новая привычка</h2>
+                <div class="icon-label">Иконка</div>
+                <div class="icon-select">
+                    <button class="icon icon-active" value="food">
+                        <img src="images/icons/food.svg" alt="">
+                    </button>
+                    <button class="icon" value="sport">
+                        <img src="images/icons/sport.svg" alt="">
+                    </button>
+                    <button class="icon" value="water">
+                        <img src="images/icons/water.svg" alt="">
+                    </button>
+                </div>
+                <form class="popup__form">
+                    <input type="text" class="form__input" name="name" placeholder="Название">
+                    <input type="text" name="icon" hidden>
+                    <input type="number" class="form__input" name="target" placeholder="Цель">
+                    <button class="form__done" type="submit">Добавить</button>
+                </form>
+                <button class="popup__close" onclick="togglePopup(event)">
+                    <img src="images/icons/close.svg" alt="Закрыть попап">
+                </button>
+            </div>
         </div>
     </div>
     <script src="scripts/app.js"></script>

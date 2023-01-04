@@ -15,6 +15,10 @@ const page = {
     content: {
         days: document.querySelector('.days'),
         nextDay: document.querySelector('.habbit__day')
+    },
+    popup: {
+        index: document.querySelector('.cover'),
+        iconField: document.querySelector('.popup__form input[name="icon"]')
     }
 }
 
@@ -37,6 +41,23 @@ function getPathIcon(nameIcon) {
     return `images/icons/${nameIcon}.svg`;
 }
 
+function togglePopup(event) {
+    page.popup.index.classList.toggle('cover_hidden')
+}
+
+function setIcon() {
+    const icons = document.querySelectorAll('.icon');
+    icons.forEach(icon => {
+        icon.addEventListener('click', e => {
+            if (!icon.classList.contains('icon-active')) {
+                const activeIcon = document.querySelector('.icon.icon-active');
+                activeIcon.classList.remove('icon-active');
+                icon.classList.add('icon-active')
+            }
+            page.popup.iconField.setAttribute('value', icon.value);
+        });
+    });
+}
 
 /* render */
 function renderMenu(activeHabbit) {
@@ -151,6 +172,8 @@ function deleteDay(index) {
     saveData();
 }
 
+
+
 function rerender(activeHabbitId) {
     if (!activeHabbitId) {
         return;
@@ -162,9 +185,9 @@ function rerender(activeHabbitId) {
     renderHabbitDays(activeHabbit);
 }
 
-
 /* init */
 (() => {
     loadData();
     rerender(habbits[0].id);
+    setIcon();
 })()

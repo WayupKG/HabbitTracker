@@ -217,7 +217,7 @@ header h1 {
     width: 100%;
 }
 
-.habbit__input {
+.form__input {
     background: #FFF;
     border: 1px solid #E7EBFB;
     border-radius: 9px;
@@ -225,20 +225,23 @@ header h1 {
     font-family: 'Comfortaa', cursive;
     font-size: 16px;
     width: 100%;
+}
+
+.input-icon {
     padding-left: 45px;
 }
 
-.habbit__input.error {
+.form__input.error {
     border: 2px solid red;
 }
 
-.habbit__input-icon {
+.form__input-icon {
     position: absolute;
     top: 11px;
     left: 20px;
 }
 
-.habbit__form-done {
+.form__done {
     background: #EDECFE;
     border-radius: 9px;
     padding: 15px 30px;
@@ -250,7 +253,107 @@ header h1 {
     transition: all .2s;
 }
 
-.habbit__form-done:hover {
+.form__done:hover {
     background: #5051F9;
     color: #fff;
+}
+
+
+
+/* ------------ Cover ------------- */
+/* popup */
+
+.cover {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cover_hidden {
+    display: none;
+}
+
+.popup {
+    min-width: 500px;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 14px 12px rgba(56, 56, 56, 0.05);
+    border-radius: 10px;
+    padding: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.popup__close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+h2 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.icon-label {
+    font-size: 16px;
+    line-height: 16px;
+    color: #768396;
+    margin: 10px 0;
+}
+
+.icon-select {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.icon-select .icon {
+    border: 1px solid #5051F9;
+    border-radius: 14px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+}
+
+.icon-select .icon img {
+    transform: scale(1.5);
+}
+
+.icon-select .icon:hover {
+    background: #6A6AFB;
+}
+
+.icon-select .icon:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.icon-select .icon-active {
+    background: #5051F9;
+}
+.icon-select .icon-active img {
+    filter: brightness(0) invert(1);
+}
+
+.popup__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
